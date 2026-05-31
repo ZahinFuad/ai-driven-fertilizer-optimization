@@ -1,0 +1,6 @@
+,Total_Input,Total_Input,Total_Input,Predicted_Yield_kg_ha,Predicted_Yield_kg_ha,Predicted_Yield_kg_ha
+,min,mean,max,min,mean,max
+Strategy,,,,,,
+Balanced,3.22,6.61,10.0,2381.54,2550.98,2721.25
+High-Yield,10.24,18.67,29.72,2749.55,3026.59,3239.41
+Sustainable,0.04,1.26,2.94,1061.49,1707.41,2355.17

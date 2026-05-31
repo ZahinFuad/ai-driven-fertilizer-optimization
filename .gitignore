@@ -1,0 +1,24 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+
+# Local raw datasets and generated artifacts
+artifacts/
+data/raw/
+Cropland_Maps/
+Production_Crops_Livestock_E_All_Data.csv
+bioinformatics.zip
+
+# Trained binary model artifacts
+*.pkl
+
+# Local manuscript/export files
+final_paper.pdf
+*.docx
+*.pptx
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
