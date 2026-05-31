@@ -1,12 +1,16 @@
 # Associated Paper
 
-This repository accompanies the conference paper published on IEEE Xplore:
+This repository accompanies the STI 2025 conference paper:
+
+**AI-Based Fertilizer Optimization Using Random Forests and NSGA-II for Soybean Yield in Brazil**
 
 [IEEE Xplore document 11367605](https://ieeexplore.ieee.org/abstract/document/11367605)
 
 ## Citation
 
 Use the official IEEE Xplore citation for formal references. Add the complete BibTeX or IEEE citation here after exporting it from IEEE Xplore.
+
+Conference venue listed in the paper: 2025 IEEE 7th International Conference on Sustainable Technologies for Industry 5.0 (STI 2025), 11-12 December, Dhaka.
 
 ## Manuscript Access
 

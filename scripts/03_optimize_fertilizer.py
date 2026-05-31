@@ -2,6 +2,7 @@
 
 import joblib
 import numpy as np
+import os
 import pandas as pd
 import warnings
 from pymoo.algorithms.moo.nsga2 import NSGA2
@@ -14,6 +15,8 @@ from _paths import ARTIFACT_MODELS, ARTIFACT_TABLES, PROCESSED_DATA, ensure_arti
 
 
 FEATURE_COLUMNS = ["N_kg_ha", "P2O5_kg_ha", "K2O_kg_ha"]
+NSGA2_POPULATION = int(os.getenv("NSGA2_POPULATION", "100"))
+NSGA2_GENERATIONS = int(os.getenv("NSGA2_GENERATIONS", "200"))
 warnings.filterwarnings("ignore", message="Values in x were outside bounds.*", category=RuntimeWarning)
 
 
@@ -104,8 +107,8 @@ def main() -> None:
 
     res = minimize(
         FertilizerOptimizationProblem(),
-        NSGA2(pop_size=50),
-        get_termination("n_gen", 80),
+        NSGA2(pop_size=NSGA2_POPULATION),
+        get_termination("n_gen", NSGA2_GENERATIONS),
         seed=42,
         verbose=False,
     )
