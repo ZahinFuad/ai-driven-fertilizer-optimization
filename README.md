@@ -10,6 +10,14 @@ This repository accompanies the STI 2025 conference paper available on IEEE Xplo
 
 The public repository does not include the publisher PDF by default. See [docs/paper.md](docs/paper.md) for citation details and manuscript access notes.
 
+## Methodology at a Glance
+
+![Methodology pipeline](results/figures/fig1_methodology_pipeline.png)
+
+## Why This Matters
+
+Chemical fertilizer overuse can increase production costs and environmental harm without proportional yield gains. This project shows how a transparent machine-learning and optimization workflow can turn historical fertilizer and yield data into practical decision support: predict yield response, expose nutrient trade-offs, and organize feasible recommendations into sustainable, balanced, and high-yield strategies.
+
 ## Research Focus
 
 - Country: Brazil
@@ -18,6 +26,14 @@ The public repository does not include the publisher PDF by default. See [docs/p
 - Inputs: Nitrogen (N), phosphorus (P2O5), potassium (K2O)
 - Target: Soybean yield in kg/ha
 - Methods: Random Forest regression, Linear Regression, XGBoost, NSGA-II optimization, scenario simulation, strategy zoning
+
+## Research Questions
+
+1. Can soybean yield in Brazil be predicted from historical N, P2O5, and K2O fertilizer application rates?
+2. Which regression model best captures the fertilizer-yield relationship in a small national-level tabular dataset?
+3. Can fertilizer input be reduced while preserving acceptable predicted yield?
+4. What trade-offs emerge between total fertilizer use and predicted soybean yield under NSGA-II optimization?
+5. Which nutrients appear most important under linear correlation analysis versus nonlinear Random Forest feature importance?
 
 ## Repository Structure
 
@@ -70,6 +86,23 @@ Raw GeoTIFF and FAOSTAT inputs are not tracked in Git because they are large ext
 
 The optimization script defaults to the paper's NSGA-II settings: population size 100, 200 generations, and random seed 42. For a faster local smoke test, set `NSGA2_POPULATION` and `NSGA2_GENERATIONS` before running `scripts/03_optimize_fertilizer.py`.
 
+## Quick Smoke Test
+
+These commands verify that the public workflow is wired correctly without running the full paper-scale NSGA-II search:
+
+```powershell
+python -m compileall scripts
+python scripts/02_train_models.py
+$env:NSGA2_POPULATION="20"; $env:NSGA2_GENERATIONS="10"; python scripts/03_optimize_fertilizer.py
+python scripts/04_scenario_analysis.py
+python scripts/05_strategy_recommender.py
+python scripts/06_generate_figures.py
+Remove-Item Env:\NSGA2_POPULATION
+Remove-Item Env:\NSGA2_GENERATIONS
+```
+
+`scripts/01_prepare_data.py` requires the excluded raw GeoTIFF, FAOSTAT, and Natural Earth files under `data/raw/`; skip it unless those local datasets are present.
+
 ## Model Results
 
 Paper-reported model performance:
@@ -90,13 +123,17 @@ Random Forest produced the strongest predictive performance and was used as the 
 - Pearson correlation ranked P2O5 highest in linear association with yield, while Random Forest feature importance identified K2O as the dominant nonlinear predictor.
 - Pareto-optimal solutions were organized into sustainable, balanced, and high-yield strategy zones for decision support.
 
+## Limitations
+
+- The analysis uses national-level aggregate data for Brazil, which can hide regional soil, climate, and management variability.
+- The model treats fertilizer inputs as the main yield drivers and does not include weather, soil properties, pest pressure, crop variety, irrigation, or management practices.
+- Historical improvements in agronomy or technology may be partially conflated with fertilizer effects.
+- The recommendations are model-based decision-support outputs, not field-validated prescriptions.
+- Future work should add regional or field-level data, climate variables, soil covariates, and validation against observed farm outcomes.
+
 ## Paper Figures
 
 The figures below follow the paper's figure order.
-
-**Fig. 1. Methodology pipeline**
-
-![Methodology pipeline](results/figures/fig1_methodology_pipeline.png)
 
 **Fig. 2. Yield response curves**
 
